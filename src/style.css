@@ -1,0 +1,414 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GLOBAL */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  min-height: 100vh;
+  width: 100%;
+  color: #e2e8f0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* WRAPPER - PENTING: Tidak boleh ada max-width atau margin auto! */
+.app {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.navbar-content {
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* STATUS */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(30, 41, 59, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.status-label {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.status-value {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.status-value.online {
+  color: #22c55e;
+}
+
+.status-value.offline {
+  color: #ef4444;
+}
+
+/* CONTENT CONTAINER - PENTING: Tidak boleh ada max-width atau margin auto! */
+.container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 40px !important;
+}
+
+/* MONITORING ROW */
+.monitoring-row {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 20px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Card di monitoring row tidak perlu max-width */
+.monitoring-row .card {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* CARD STYLE */
+.card, .box {
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 18px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  transition: 0.3s ease;
+  width: 100%;
+}
+
+.card {
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.card:hover, .box:hover {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.25);
+  transform: translateY(-3px);
+}
+
+/* TITLE */
+.card h2, .box h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  text-align: center;
+  color: #f8fafc;
+}
+
+/* VALUE TEXT (untuk Jarak & Suhu) */
+.card p {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #60a5fa;
+  text-align: center;
+  margin: 0;
+}
+
+/* BUTTON */
+.btn, .btn-danger {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+}
+
+.btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45);
+}
+
+/* INPUTS */
+input[type="time"], select {
+  padding: 10px 14px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  color: #e2e8f0;
+  transition: 0.25s ease;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+input[type="time"]:focus, select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  outline: none;
+  background: rgba(15, 23, 42, 0.9);
+}
+
+/* Special styling untuk card Pakan Manual dan Jadwal Pakan */
+.card input[type="time"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+}
+
+.card .btn {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 18px;
+  font-size: 0.88rem;
+}
+
+/* LIST JADWAL */
+ul {
+  list-style: none;
+  margin-top: 20px;
+  width: 100%;
+}
+
+ul li {
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: 0.25s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+ul li:hover {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+/* Text jadwal di kiri */
+ul li > span {
+  flex: 1;
+  font-size: 1rem;
+  color: #e2e8f0;
+}
+
+/* Container untuk button di kanan - harus lebih spesifik */
+ul li > .btn,
+ul li > .btn-danger {
+  flex-shrink: 0;
+  width: auto !important;
+  min-width: 80px;
+  max-width: 100px;
+  padding: 8px 16px !important;
+  font-size: 0.85rem !important;
+}
+
+/* Ketika mode edit */
+ul li > div {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+ul li > div input[type="time"],
+ul li > div select {
+  flex: 1;
+  min-width: 120px;
+  margin-bottom: 0;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+ul li > div + .btn {
+  width: auto !important;
+  min-width: 80px;
+  max-width: 100px;
+  padding: 8px 16px !important;
+  font-size: 0.85rem !important;
+}
+
+ul li > div + .btn + .btn-danger {
+  width: auto !important;
+  min-width: 80px;
+  max-width: 100px;
+  padding: 8px 16px !important;
+  font-size: 0.85rem !important;
+}
+
+/* TABLE */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  table-layout: fixed;
+}
+
+.table thead {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.table th,
+.table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.table th:first-child,
+.table td:first-child {
+  width: 80px;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 150px;
+  text-align: left;
+  padding-left: 40px;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  text-align: left;
+  padding-left: 60px;
+}
+
+.table th {
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+}
+
+.table td {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.table tbody tr {
+  transition: 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .monitoring-row {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    padding: 20px;
+  }
+
+  .navbar-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .container {
+    padding: 20px !important;
+  }
+  
+  ul li {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  ul li input[type="time"],
+  ul li select,
+  ul li button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .monitoring-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .monitoring-row > :last-child {
+    grid-column: 1 / -1;
+  }
+}
