@@ -24,17 +24,21 @@ export default function Jarak() {
     
     // Asumsi: jarak kecil = pakan penuh, jarak besar = pakan kosong
     // Sesuaikan threshold ini dengan kondisi wadah pakan Anda
-    if (distance <= 5) {
-      return { label: "Penuh", color: "#22c55e", percentage: 100 };
-    } else if (distance <= 10) {
-      return { label: "Banyak", color: "#3b82f6", percentage: 75 };
-    } else if (distance <= 15) {
-      return { label: "Setengah", color: "#f59e0b", percentage: 50 };
-    } else if (distance <= 20) {
-      return { label: "Sedikit", color: "#ef4444", percentage: 25 };
-    } else {
+    if (distance <= 0) {
       return { label: "Kosong", color: "#dc2626", percentage: 0 };
+    } else if (distance <= 5) {
+      return { label: "Sedikit", color: "#ef4444", percentage: 25 };
+    } else if (distance <= 10) {
+      return { label: "Setengah", color: "#f59e0b", percentage: 50 };
+    } else if (distance <= 13) {
+      return { label: "Banyak", color: "#3b82f6", percentage: 75 };
+    } else if (distance <= 16) {
+      return { label: "Penuh", color: "#22c55e", percentage: 100 };
+    } else {
+      // jika nilai aneh di luar range
+      return { label: "Tidak valid", color: "#9ca3af", percentage: 0 };
     }
+
   };
 
   const status = getStatus();

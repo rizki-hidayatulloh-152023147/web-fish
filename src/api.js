@@ -1,42 +1,60 @@
-// src/api.js
-const API = "http://localhost:4000";
+const API = "https://sherill-transitional-conception.ngrok-free.dev";
+
+const request = async (path, options = {}) => {
+  const res = await fetch(API + path, {
+    ...options,
+    headers: {
+      "ngrok-skip-browser-warning": "true", // 🔥 WAJIB untuk ngrok
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    },
+  });
+
+  
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || "API Error");
+  }
+
+  return res.json();
+};
+
 
 export const getStatus = () =>
-  fetch(API + "/status").then(res => res.json());
+  request("/status");
 
 export const getMonitoring = () =>
-  fetch(API + "/monitoring").then(res => res.json());
+  request("/monitoring");
 
 export const getFeedingLog = () =>
-  fetch(API + "/feeding/log").then(res => res.json());
+  request("/feeding/log");
 
 export const feedManual = () =>
-  fetch(API + "/feeding/manual", { method: "POST" })
-    .then(res => res.json());
-
-export const getJadwal = () =>
-  fetch(API + "/jadwal").then(res => res.json());
-
-export const addJadwal = (jam) =>
-  fetch(API + "/jadwal", {
+  request("/feeding/manual", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ jam })
-  }).then(res => res.json());
-
-export const updateJadwal = (id, jam, aktif) =>
-  fetch(API + "/jadwal/" + id, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ jam, aktif })
-  }).then(res => res.json());
-
-export const deleteJadwal = (id) =>
-  fetch(API + "/jadwal/" + id, {
-    method: "DELETE"
-  }).then(res => res.json());
+  });
 
 export const deleteFeeding = (id) =>
-  fetch(API + "/feeding/" + id, {
-    method: "DELETE"
-  }).then(res => res.json());
+  request(`/feeding/${id}`, {
+    method: "DELETE",
+  });
+
+export const getJadwal = () =>
+  request("/jadwal");
+
+export const addJadwal = (jam) =>
+  request("/jadwal", {
+    method: "POST",
+    body: JSON.stringify({ jam }),
+  });
+
+export const updateJadwal = (id, jam, aktif) =>
+  request(`/jadwal/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ jam, aktif }),
+  });
+
+export const deleteJadwal = (id) =>
+  request(`/jadwal/${id}`, {
+    method: "DELETE",
+  });
