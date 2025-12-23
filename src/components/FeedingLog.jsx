@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFeedingLog } from "../api";
+import { getFeedingLog, deleteFeeding } from "../api";
 
 export default function FeedingLog() {
   const [log, setLog] = useState([]);
@@ -19,6 +19,12 @@ export default function FeedingLog() {
     setLog(r);
   };
 
+  const remove = async (id) => {
+  if (!confirm("Hapus jadwal ini?")) return;
+  await deleteFeeding(id);
+  load();
+  };
+
   return (
     <div className="box">
       <h2>Feeding Log</h2>
@@ -29,6 +35,7 @@ export default function FeedingLog() {
             <th>No</th>
             <th>Mode</th>
             <th>Waktu</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +44,12 @@ export default function FeedingLog() {
               <td>{index + 1}</td>
               <td>{item.mode}</td>
               <td>{new Date(item.waktu).toLocaleString()}</td>
+
+              <td>
+                <button className="btn-danger" onClick={() => remove(item.id)}>
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -35,3 +35,8 @@ export const deleteJadwal = (id) =>
   fetch(API + "/jadwal/" + id, {
     method: "DELETE"
   }).then(res => res.json());
+
+export const deleteFeeding = (id) =>
+  fetch(API + "/feeding/" + id, {
+    method: "DELETE"
+  }).then(res => res.json());
